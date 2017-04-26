@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+    <title>Control de personal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+    <script src="js/tooltips/angular-tooltips.min.js"></script>
+    <script src="js/lodash.js"></script>
+    <script src="js/script.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link href="foundation/css/foundation.min.css" rel="stylesheet" type="text/css" />
+    <link href="foundation/fonts/foundation-icons.css" rel="stylesheet" type="text/css" />
+    <link href="js/tooltips/angular-tooltips.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/estilos.css" rel="stylesheet" type="text/css" />
+    <link href="favicon.ico" rel="shortcut icon" type="text/css" />
+</head>
+<body ng-app="controlPersonal">
+    <div class="row expanded collapse" ng-controller="MainController">
+        <div class="medium-3 large-2 columns menu">
+            <nav>
+                <div class="logo text-center">
+                    <img src="img/logo.png" alt="Patitas de Coraz&oacute;n" />
+                    <div>Control de personal</div>
+                </div>
+                <div class="resp" id="menu_resp">
+                    <a>Menu</a>
+                </div>
+                <ul id="nav_menu" ng-init="menus[0].activo = true">
+                    <li ng-repeat="(key, menu) in menus" ng-class="{activo: menu.activo}">
+                        <a href="{{ menu.href }}" ng-click="activar(menu)"><i class="{{ menu.clase }}"></i> {{ menu.label }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="medium-9 large-10 columns contenido">
+            <header>
+                <div class="row">
+                    <div class="medium-6 large-7 columns">
+                        
+                    </div>
+                    <div class="medium-6 large-5 columns info">
+                        <div class="row">
+                            <div class="medium-3 columns"><i class="fi-telephone"></i> <small>111-222333</small></div>
+                            <div class="medium-5 columns"><i class="fi-marker"></i> <small>Av. Siempre Viva 123</small></div>
+                            <div class="medium-4 columns"><i class="fi-mail"></i> <small>info@frontier.com</small></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <ng-view></ng-view>
+            </main>
+            <footer>
+                <div class="row">
+                    <div class="medium-10 medium-centered">
+                        <div class="row">
+                            <div class="small-12 columns text-center">
+                                <a href="http://facebook.com" class="social facebook" target="_blank"><i class="fi-social-facebook"></i></a>
+                                <a href="http://twitter.com" class="social twitter" target="_blank"><i class="fi-social-twitter"></i></a>
+                                <a href="http://instagram.com" class="social instagram" target="_blank"><i class="fi-social-instagram"></i></a>
+                                <a href="http://plus.google.com" class="social gplus" target="_blank"><i class="fi-social-google-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<h2 class="titulo">Hist&oacute;rico</h2>
+
+<div class="row">
+    <div class="medium-2 columns">Filtrar por empleado</div>
+    <div class="medium-2 columns end    ">
+        <select name="empleado" ng-model="empleado" ng-options="e.id as e.nombre for e in empleados">
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="medium-2 columns item head">ID</div>
+    <div class="medium-2 columns item head">Fecha</div>
+    <div class="medium-4 columns item head">Empleado</div>
+    <div class="medium-2 columns item head">Entrada</div>
+    <div class="medium-2 columns item head">Salida</div>
+</div>
+
+<div class="row" ng-repeat="(key, turno) in turnos | filter:{ idEmpleado: empleado }">
+    <div class="medium-2 columns item">{{ turno.id }}</div>
+    <div class="medium-2 columns item">{{ turno.fecha }}</div>
+    <div class="medium-4 columns item">{{ obtenerEmpleado(turno.idEmpleado) }}</div>
+    <div class="medium-2 columns item">{{ turno.inicio }}</div>
+    <div class="medium-2 columns item">{{ turno.fin }}</div>
+</div>

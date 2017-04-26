@@ -1,0 +1,24 @@
+<h2 class="titulo">Lista de turnos</h2>
+
+<div class="row">
+    <div class="medium-12 columns"><a class="button default" href="#/turnos/crear"><i class="fi-plus"></i> Crear turno</a></div>
+</div>
+
+<div class="row">
+    <div class="medium-2 columns item head">ID</div>
+    <div class="medium-3 columns item head">Nombre</div>
+    <div class="medium-2 columns item head">Tiempo</div>
+    <div class="medium-2 columns item head">Receso</div>
+    <div class="medium-3 columns item head">Acciones</div>
+</div>
+
+<div class="row" ng-repeat="(key, turno) in turnos">
+    <div class="medium-2 columns item">{{ turno.id }}</div>
+    <div class="medium-3 columns item">{{ turno.nombre }}</div>
+    <div class="medium-2 columns item">{{ turno.inicio }}-{{ turno.fin }}</div>
+    <div class="medium-2 columns item">{{ turno.recesoInicio }}-{{ turno.recesoFin }}</div>
+    <div class="medium-3 columns item">
+        <a href="#/turnos/editar/{{ turno.id }}" tooltips tooltip-template="Editar"><i class="fi-pencil"></i></a>
+        <a ng-click="borrar()" tooltips tooltip-template="Borrar"><i class="fi-trash"></i></a>
+    </div>
+</div>
