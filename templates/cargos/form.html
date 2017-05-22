@@ -1,4 +1,5 @@
-<h2 class="titulo">Editar cargo</h1>
+<h2 class="titulo" ng-init="init()">Editar cargo</h2>
+<input type="hidden" name="id" ng-model="cargo.id" />
 <div class="row">
     <div class="medium-3 columns"><label for="nombre">Nombre</label></div>
     <div class="medium-9 columns"><input type="text" name="nombre" ng-model="cargo.nombre" /></div>
