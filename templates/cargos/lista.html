@@ -15,6 +15,6 @@
     <div class="medium-6 columns item">{{ cargo.nombre }}</div>
     <div class="medium-4 columns item">
         <a href="#/cargos/editar/{{ cargo.id }}" tooltips tooltip-template="Editar"><i class="fi-pencil"></i></a>
-        <a ng-click="borrar()" tooltips tooltip-template="Borrar"><i class="fi-trash"></i></a>
+        <a ng-click="borrar(cargo.id)" tooltips tooltip-template="Borrar"><i class="fi-trash"></i></a>
     </div>
 </div>

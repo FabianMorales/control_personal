@@ -1,5 +1,9 @@
 RewriteEngine On
-RewriteBase /control_personal/api/
+RewriteBase /desarrolloweb/control_personal/api/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
+
+<Limit GET POST PUT DELETE>
+  Allow from all
+</Limit>

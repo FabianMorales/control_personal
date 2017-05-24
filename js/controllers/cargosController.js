@@ -14,7 +14,7 @@
             templateUrl: 'templates/registro.html', controller: 'MainController'
        });
     }])
-    .controller('CargosController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    .controller('CargosController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams, $location) {
         $scope.cargos = [];
 
         $scope.init = function(){
@@ -43,17 +43,37 @@
         $scope.guardar = function() {
             $http({
                 method: 'POST',
-                url: './api/cargo/guardar',
+                url: './api/cargo',
                 data: $scope.cargo
             }).then(function (response) {
                 $scope.cargos = response.data;
+                $location.path('/cargos');
             }, function (response) {
 
             });
         };
 
-        $scope.borrar = function() {
-            alert('Esta funcionalidad no está implementada');
+        $scope.borrar = function($id) {
+            if(!confirm('¿Está seguro de borrar este cargo?')){
+                return;
+            }
+            
+            $http({
+                method: 'DELETE',
+                url: './api/cargo/'+$id
+            }).then(function (response) {
+                if (response.data.ok === 1){
+                    $scope.cargos = response.data.datos;
+                    console.log($scope.cargos);
+                    alert(response.data.mensaje);
+                }
+                else{
+                    alert(response.data.mensaje);
+                }
+                
+            }, function (response) {
+
+            });
         };
     }]);
 })(window.$angular, window._, window);

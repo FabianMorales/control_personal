@@ -33,7 +33,27 @@ class cargoController extends myController {
             $ret = ["ok" => 1, "mensaje" => "Cargo guardado exitosamente"];
         }
         else{
-            $ret = ["ok" => 2, "mensaje" => "No se pudo guardar el cargo"];
+            $ret = ["ok" => 0, "mensaje" => "No se pudo guardar el cargo"];
+        }
+        
+        return json_encode($ret);
+    }
+    
+    public function borrarCargo($id){   
+        $cargo = Cargo::find($id);
+        $ret = [];
+        
+        if (!sizeof($cargo)){
+            $ret = ["ok" => 0, "mensaje" => "Cargo no encontrado"];
+        }
+        else{
+            if ($cargo->delete()){
+                $cargos = Cargo::all();
+                $ret = ["ok" => 1, "mensaje" => "Cargo borrado exitosamente", "datos" => $cargos];
+            }
+            else{
+                $ret = ["ok" => 0, "mensaje" => "No se pudo borrar el cargo"];
+            }
         }
         
         return json_encode($ret);
