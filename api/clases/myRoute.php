@@ -11,6 +11,7 @@ class myRoute {
         $app->get('/cargo/:id', myController::_("cargo@mostrarCargo"));
         $app->post('/cargo', myController::_("cargo@guardarCargo"));
         $app->delete('/cargo/:id', myController::_("cargo@borrarCargo"));
+        $app->get('/files/cargo', myController::_("cargo@listarCargos"));
 
         $app->run();
         return $app;
