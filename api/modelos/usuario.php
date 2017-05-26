@@ -1,10 +1,6 @@
 <?php
 
 class Usuario extends myEloquent {    
-    protected $table = 'users';
+    protected $table = 'par_usuario';
     protected $fillable = array('id', 'name', 'username', 'email', 'password');
-    
-    public function my(){
-        return $this->hasOne("MyUsuario", "id");
-    }
 }
