@@ -1,7 +1,10 @@
-<h2 class="titulo">Lista de empleados</h2>
+<h2 class="titulo" ng-init="init()">Lista de empleados</h2>
 
 <div class="row">
-    <div class="medium-12 columns"><a class="button default" href="#/empleados/crear"><i class="fi-plus"></i> Crear empleado</a></div>
+    <div class="medium-12 columns">
+        <a class="button default" href="#/empleados/crear"><i class="fi-plus"></i> Crear empleado</a>
+        <a class="button default" href="./api/files/usuario"><i class="fi-download"></i> Lista de empleados</a>
+    </div>
 </div>
 
 <div class="row">
@@ -12,9 +15,10 @@
 
 <div class="row" ng-repeat="(key, empleado) in empleados">
     <div class="medium-2 columns item">{{ empleado.id }}</div>
-    <div class="medium-6 columns item">{{ empleado.nombre }}</div>
+    <div class="medium-6 columns item">{{ empleado.nombres }}</div>
     <div class="medium-4 columns item">
         <a href="#/empleados/editar/{{ empleado.id }}" tooltips tooltip-template="Editar"><i class="fi-pencil"></i></a>
+        <a href="./api/files/usuario/{{ empleado.id }}" tooltips tooltip-template="Descargar"><i class="fi-download"></i></a>
         <a ng-click="borrar()" tooltips tooltip-template="Borrar"><i class="fi-trash"></i></a>
     </div>
 </div>

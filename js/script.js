@@ -1,5 +1,5 @@
 (function($angular, $window){
-    $window.$angular = $angular.module('controlPersonal', ['ngRoute', '720kb.tooltips'])
+    $window.$angular = $angular.module('controlPersonal', ['ngRoute', '720kb.tooltips', 'moment-picker'])
     .config(['$httpProvider', function($httpProvider) {
         if (!$httpProvider.defaults.headers.get) {
             $httpProvider.defaults.headers.get = {};    

@@ -12,14 +12,13 @@ if (!defined("DS")){
         $clasesDir."myConfig.php",
         $clasesDir."myDocumento.php",
         $clasesDir."myFunciones.php",
+        $clasesDir."myBaseDatos.php",
         $clasesDir."myModelo.php",
-        $clasesDir."myController.php",
-        $clasesDir."myAdminController.php",
-        $clasesDir."myRequest.php",
-        $clasesDir."myRoute.php",
-        $clasesDir."mySession.php",
-        $libDir.'laravel/autoload.php',
-        $clasesDir.'myEloquent.php',
+        $clasesDir."myControlador.php",
+        $clasesDir."myAdminControlador.php",
+        $clasesDir."myPeticion.php",
+        $clasesDir."myEnrutador.php",
+        $clasesDir."mySesion.php",
         $libDir."Slim/Slim.php"
     ];
 
@@ -27,8 +26,7 @@ if (!defined("DS")){
         require_once $a;
     }
     
-    mySession::boot();
-    myModelo::boot();
-    myRequest::boot(null);
-    $app = myRoute::boot();
+    mySesion::boot();
+    myPeticion::boot();
+    $app = myEnrutador::boot();
 }

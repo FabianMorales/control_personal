@@ -12,25 +12,6 @@
             { label: 'Histórico', clase:'fi-clock', href: '#/historico', activo: false }
         ];
 
-        $scope.empleados = [
-            { id: 1, cedula: '0001', nombre: 'Empleado uno', idCargo: 1, salario: 123456, clave: 'abcd' },
-            { id: 2, cedula: '0002', nombre: 'Empleado dos', idCargo: 2, salario: 123456, clave: 'abcd' },
-            { id: 3, cedula: '0003', nombre: 'Empleado tres', idCargo: 3, salario: 123456, clave: 'abcd' },
-            { id: 4, cedula: '0004', nombre: 'Empleado cuatro', idCargo: 4, salario: 123456, clave: 'abcd' },
-            { id: 5, cedula: '0005', nombre: 'Empleado cinco', idCargo: 5, salario: 123456, clave: 'abcd' },
-            { id: 6, cedula: '0006', nombre: 'Empleado seis', idCargo: 6, salario: 123456, clave: 'abcd' },
-            { id: 7, cedula: '0007', nombre: 'Empleado siete', idCargo: 6, salario: 123456, clave: 'abcd' }
-        ];
-
-        $scope.cargos = [
-            { id: 1, nombre: 'Gerente' },
-            { id: 2, nombre: 'Coordinador' },
-            { id: 3, nombre: 'Jefe' },
-            { id: 4, nombre: 'Director' },
-            { id: 5, nombre: 'Vendedor' },
-            { id: 6, nombre: 'Operario' }        
-        ];
-
         $scope.activar = function(menu){
             _.forEach($scope.menus, function(value, key) {
                 value.activo = false;
@@ -42,28 +23,24 @@
         };
 
         $scope.autorizar = function() {
-            console.log($scope.cedula);
-            var $i = _.findIndex($scope.empleados, function(o) { return o.cedula == $scope.cedula; });
-            console.log($i);
+            $http({
+                method: 'POST',
+                url: './api/usuario/validar',
+                data: { 'cedula': $scope.cedula, 'clave': $scope.clave }
+            }).then(function (response) {
+                if (response.data.ok === 1){
+                    $scope.empleado = response.data.usuario;
+                }
+                else{
+                    alert(response.data.mensaje);
+                }
+            }, function (response) {
 
-            var $emp = $scope.empleados[$i];
-
-            if (_.isEmpty($emp)){
-                alert('El empleado no existe');
-                return;
-            }
-
-            if ($emp.clave !== $scope.clave){
-                alert('La clave no es válida');
-                return;
-            }
-
-            $scope.empleado = $emp;
+            });
         };
 
         $scope.buscarCargo = function($id){
-            var $cargo = _.findIndex($scope.cargos, function(o) { return o.id === $id; });        
-            return $scope.cargos[$cargo].nombre;
+            return "";
         };
 
         $scope.iniciar = function() {

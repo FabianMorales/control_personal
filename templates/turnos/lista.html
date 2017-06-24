@@ -1,7 +1,10 @@
-<h2 class="titulo">Lista de turnos</h2>
+<h2 class="titulo" ng-init="init()">Lista de turnos</h2>
 
 <div class="row">
-    <div class="medium-12 columns"><a class="button default" href="#/turnos/crear"><i class="fi-plus"></i> Crear turno</a></div>
+    <div class="medium-12 columns">
+        <a class="button default" href="#/turnos/crear"><i class="fi-plus"></i> Crear turno</a>
+        <a class="button default" href="./api/files/turno"><i class="fi-download"></i> Lista de turnos</a>
+    </div>
 </div>
 
 <div class="row">
@@ -16,9 +19,10 @@
     <div class="medium-2 columns item">{{ turno.id }}</div>
     <div class="medium-3 columns item">{{ turno.nombre }}</div>
     <div class="medium-2 columns item">{{ turno.inicio }}-{{ turno.fin }}</div>
-    <div class="medium-2 columns item">{{ turno.recesoInicio }}-{{ turno.recesoFin }}</div>
+    <div class="medium-2 columns item">{{ turno.inicio_receso }}-{{ turno.fin_receso }}</div>
     <div class="medium-3 columns item">
         <a href="#/turnos/editar/{{ turno.id }}" tooltips tooltip-template="Editar"><i class="fi-pencil"></i></a>
+        <a href="./api/files/turno/{{ turno.id }}" tooltips tooltip-template="Descargar"><i class="fi-download"></i></a>
         <a ng-click="borrar()" tooltips tooltip-template="Borrar"><i class="fi-trash"></i></a>
     </div>
 </div>

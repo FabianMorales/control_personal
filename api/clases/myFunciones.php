@@ -1,24 +1,19 @@
 <?php
-/*
-	Héctor Fabián Morales Ramírez
-	Tecnólogo en Ingeniería de Sistemas
-	Enero 2011
-*/
 
 class myFunciones{
 
     public function generarToken($owner=""){		
         $token = md5(mktime().uniqid());
-        mySession::set("token".$owner, $token);
+        mySesion::set("token".$owner, $token);
     }
 
     public function getToken($owner=""){        
-        $token = mySession::get("token".$owner);       
+        $token = mySesion::get("token".$owner);       
         return $token;
     }
     
     public function borrarToken($owner=""){        
-        mySession::clear("token".$owner);
+        mySesion::clear("token".$owner);
     }
 
     public function reprocesarHtml($html){
@@ -130,8 +125,7 @@ class myFunciones{
         catch(Exception $e){
             $imageDest = @imagecreate($outputX, $outputY);
         }
-
-        //if (@imagecopyresized($imageDest, $imageSrc, 0, 0, $deltaX, $deltaY, $outputX, $outputY, $portionX, $portionY)) {
+        
         if (@imagecopyresampled($imageDest, $imageSrc, 0, 0, $deltaX, $deltaY, $outputX, $outputY, $portionX, $portionY)) {
             if($filePartes['extension']=="png"){
                 $quality = 0;
@@ -146,4 +140,3 @@ class myFunciones{
         return false;
     }
 }
-?>

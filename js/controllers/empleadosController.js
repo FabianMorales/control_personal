@@ -14,36 +14,87 @@
             templateUrl: 'templates/registro.html', controller: 'MainController'
        });
     }])
-    .controller('EmpleadosController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-        $scope.empleados = [
-            { id: 1, cedula: '0001', nombre: 'Empleado uno', idCargo: 1, salario: 123456, clave: 'abcd' },
-            { id: 2, cedula: '0002', nombre: 'Empleado dos', idCargo: 2, salario: 123456, clave: 'abcd' },
-            { id: 3, cedula: '0003', nombre: 'Empleado tres', idCargo: 3, salario: 123456, clave: 'abcd' },
-            { id: 4, cedula: '0004', nombre: 'Empleado cuatro', idCargo: 4, salario: 123456, clave: 'abcd' },
-            { id: 5, cedula: '0005', nombre: 'Empleado cinco', idCargo: 5, salario: 123456, clave: 'abcd' },
-            { id: 6, cedula: '0006', nombre: 'Empleado seis', idCargo: 6, salario: 123456, clave: 'abcd' },
-            { id: 7, cedula: '0007', nombre: 'Empleado siete', idCargo: 6, salario: 123456, clave: 'abcd' }
-        ];
+    .controller('EmpleadosController', ['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
+        $scope.cargos = [];
+        $scope.empleados = [];
+        $scope.empleado = {};
+        
+        $scope.init = function(){
+            
+            if ($routeParams !== 'undefined' && $routeParams.idEmpleado){
+                $http({
+                    method: 'GET',
+                    url: './api/usuario/' + $routeParams.idEmpleado
+                }).then(function (response) {
+                    $scope.empleado = response.data;
+                }, function (response) {
 
-        $scope.cargos = [
-            { id: 1, nombre: 'Gerente' },
-            { id: 2, nombre: 'Coordinador' },
-            { id: 3, nombre: 'Jefe' },
-            { id: 4, nombre: 'Director' },
-            { id: 5, nombre: 'Vendedor' },
-            { id: 6, nombre: 'Operario' }        
-        ];
+                });
+                
+                $http({
+                    method: 'GET',
+                    url: './api/cargo'
+                }).then(function (response) {
+                    $scope.cargos = response.data;
+                }, function (response) {
 
-        if ($routeParams != 'undefined'){
-            $scope.empleado = $scope.empleados[$routeParams.idEmpleado - 1];
-        }
+                });
+            }
+            else if ($location.path() === '/empleados/crear'){
+                $http({
+                    method: 'GET',
+                    url: './api/cargo'
+                }).then(function (response) {
+                    $scope.cargos = response.data;
+                }, function (response) {
 
-        $scope.guardar = function() {
-            alert('Esta funcionalidad no está implementada');
+                });
+            }
+            else{
+                $http({
+                    method: 'GET',
+                    url: './api/usuario'
+                }).then(function (response) {
+                    $scope.empleados = response.data;
+                }, function (response) {
+
+                });  
+            };
         };
 
-        $scope.borrar = function() {
-            alert('Esta funcionalidad no está implementada');
+        $scope.guardar = function() {
+            $http({
+                method: 'POST',
+                url: './api/usuario',
+                data: $scope.empleado
+            }).then(function (response) {
+                $scope.empleados = response.data;
+                $location.path('/empleados');
+            }, function (response) {
+
+            });
+        };
+
+        $scope.borrar = function($id) {
+            if(!confirm('¿Está seguro de borrar este empleado?')){
+                return;
+            }
+            
+            $http({
+                method: 'DELETE',
+                url: './api/empleado/'+$id
+            }).then(function (response) {
+                if (response.data.ok === 1){
+                    $scope.empleados = response.data.datos;
+                    alert(response.data.mensaje);
+                }
+                else{
+                    alert(response.data.mensaje);
+                }
+                
+            }, function (response) {
+
+            });
         };
     }]);
 })(window.$angular, window._, window);

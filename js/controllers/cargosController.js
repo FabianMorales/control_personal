@@ -14,8 +14,9 @@
             templateUrl: 'templates/registro.html', controller: 'MainController'
        });
     }])
-    .controller('CargosController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams, $location) {
+    .controller('CargosController', ['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
         $scope.cargos = [];
+        $scope.cargo = {};
 
         $scope.init = function(){
             if ($routeParams !== 'undefined' && $routeParams.idCargo){
