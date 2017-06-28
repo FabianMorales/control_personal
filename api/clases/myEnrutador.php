@@ -16,7 +16,11 @@ class myEnrutador {
         $app->get('/usuario', myControlador::_("Usuario@index"));
         $app->get('/usuario/:id', myControlador::_("Usuario@mostrarUsuario"));
         $app->post('/usuario', myControlador::_("Usuario@guardarUsuario"));
-        $app->post('/usuario/validar', myControlador::_("Usuario@validar"));
+        $app->post('/usuario/validar', myControlador::_("Flujo@validar"));
+        $app->get('/usuario/turno/:cedula', myControlador::_("Flujo@obtenerTurno"));
+        $app->get('/usuario/iniciar/:cedula', myControlador::_("Flujo@iniciarTurno"));
+        $app->get('/usuario/cerrar/:cedula', myControlador::_("Flujo@cerrarTurno"));
+        $app->get('/historico/turno', myControlador::_("Flujo@index"));
         $app->delete('/usuario/:id', myControlador::_("Usuario@borrarUsuario"));
         
         $app->get('/turno', myControlador::_("Turno@index"));

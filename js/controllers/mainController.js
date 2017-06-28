@@ -3,6 +3,8 @@
         $scope.cedula = '';
         $scope.clave = '';
         $scope.empleado = null;
+        $scope.iniciar = 1;
+        $scope.turno = null;
 
         $scope.menus = [
             { label: 'Inicio', clase:'fi-home', href: '#/', activo: false },
@@ -30,6 +32,7 @@
             }).then(function (response) {
                 if (response.data.ok === 1){
                     $scope.empleado = response.data.usuario;
+                    $scope.buscarTurno($scope.empleado.cedula);
                 }
                 else{
                     alert(response.data.mensaje);
@@ -38,13 +41,53 @@
 
             });
         };
+        
+        $scope.buscarTurno = function($cedula){
+            $http({
+                method: 'GET',
+                url: './api/usuario/turno/' + $cedula
+            }).then(function (response) {
+                if (response.data.ok === 1){
+                    $scope.iniciar = 0;
+                    $scope.turno = response.data.turno;
+                }
+                else{
+                    $scope.iniciar = 1;
+                    $scope.turno = null;
+                }
+            }, function (response) {
+
+            });
+        };
+        
+        $scope.iniciarTurno = function($cedula){
+            $http({
+                method: 'GET',
+                url: './api/usuario/iniciar/' + $cedula
+            }).then(function (response) {
+                $scope.iniciar = 0;
+                $scope.turno = response.data.turno;
+                alert(response.data.mensaje);
+            }, function (response) {
+
+            });
+        };
+        
+        $scope.cerrarTurno = function($cedula){
+            $http({
+                method: 'GET',
+                url: './api/usuario/cerrar/' + $cedula
+            }).then(function (response) {
+                $scope.iniciar = 1;
+                $scope.turno = null;
+                alert(response.data.mensaje);
+            }, function (response) {
+
+            });
+        };
 
         $scope.buscarCargo = function($id){
             return "";
-        };
-
-        $scope.iniciar = function() {
-            alert('Funcionalidad no implementada');
         };
     }]);
 })(window.$angular, window._, window);

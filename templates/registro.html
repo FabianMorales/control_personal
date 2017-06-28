@@ -38,7 +38,11 @@
             <li>Cédula: {{ empleado.cedula }}</li>
             <li>Cargo: {{ buscarCargo(empleado.idCargo) }}</li>
         </ul>
+        <p ng-if="turno">
+            Tienes una entrada registrada a las {{ turno.fecha_entrada }}
+        </p>
         <br />
-        <button class="button default" ng-click="iniciar()"><i class="fi-check"></i> Registrar entrada</button>
+        <button ng-if="iniciar == 1" class="button default" ng-click="iniciarTurno(empleado.cedula)"><i class="fi-check"></i> Registrar entrada</button>
+        <button ng-if="iniciar == 0" class="button default" ng-click="cerrarTurno(empleado.cedula)"><i class="fi-lock"></i> Registrar salida</button>
     </div>
 </div>

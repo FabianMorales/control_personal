@@ -130,27 +130,4 @@ class UsuarioControlador extends myControlador {
         
         die();
     }
-    
-    public function validar(){
-        $req = myApp::getPeticion();
-        $cedula = $req->getVar("cedula");
-        $clave = $req->getVar("clave");
-        
-        $modelo = myApp::getModelo("Usuario");
-        $usuarios = $modelo->adicionarCondicion("cedula", "=", $cedula)->listar();
-        $ret = [];
-        if(sizeof($usuarios)){
-            if($usuarios[0]->clave != $clave){
-                $ret = ["ok" => 0, "mensaje" => "Clave incorrecta"];
-            }
-            else{
-                $ret = ["ok" => 1, "mensaje" => "Sesion iniciada", "usuario" => $usuarios[0]];
-            }
-        }
-        else{
-            $ret = ["ok" => 0, "mensaje" => "Usuario no encontrado"];
-        }
-        
-        return json_encode($ret);
-    }
 }

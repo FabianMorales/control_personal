@@ -1,11 +1,4 @@
 <?php
-/*
-	Héctor Fabián Morales Ramírez
-	Tecnólogo en Ingeniería de Sistemas
-	Enero 2011
-*/
-
-use \Illuminate\Database\Capsule\Manager as Capsule;  
 
 abstract class myModelo{
     protected $tabla = '';
@@ -127,7 +120,7 @@ abstract class myModelo{
                 $camposInsert[] = $campo;
                 $camposInsertParam[] = ":".$campo;
                 $camposUpdate[] = $campo." = :".$campo;
-                $valores[":".$campo] = empty($this->$campo) ? null : $this->$campo;
+                $valores[":".$campo] = empty($this->$campo) && $this->campo != 0 ? null : $this->$campo;
             }
         }
         

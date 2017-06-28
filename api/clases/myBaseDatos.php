@@ -32,6 +32,7 @@ class myBaseDatos{
         $query = $this->prepararSql($sql, $params);
         
         $query->execute();
+        
         return $query->rowCount();
     }
     
