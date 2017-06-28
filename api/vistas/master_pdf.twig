@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Control de personal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+{% for js in js_doc %}
+<script src="{{ asset(js) }}"></script>
+{% endfor %}
+{% block js_header %}{% endblock %}
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
+{% for css in css_doc %}
+<link href="{{ asset(css) }}" rel="stylesheet" type="text/css" />
+{% endfor %}
+<link href="{{ asset('css/estilos_pdf.css') }}" rel="stylesheet" type="text/css" />
+{% block css_header %}{% endblock %}
+</head>
+<body>
+    <img id="bgimg" src="{{ asset('img/fondo_pdf04.jpg') }}" />
+    <header>
+        <table border="0" cellpadding="5" cellspacing="5">
+            <tr>
+                <td><img src="{{ asset('img/logo.png') }}" class="logo" /></td>
+                <td>
+                    <h2>Control de personal</h2>
+                    <h3>{% block subtitulo %}{% endblock %}</h3>
+                </td>
+            </tr>
+        </table>
+    </header>
+    
+    <main>
+    {% block contenido %}{% endblock %}
+    </main>
+        
+    <footer>
+
+    </footer>
+</body>
+</html> 

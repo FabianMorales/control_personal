@@ -117,4 +117,23 @@ class FlujoControlador extends myControlador {
         
         return json_encode($ret);
     }
+    
+    public function listarPdf(){
+        $turnos = myApp::getModelo("TurnoTrabajo")->listar();
+        $empleados = myApp::getModelo("Usuario")->listar();
+        
+        foreach ($turnos as $i => $t){
+            
+            $filtroEmp = array_filter(
+                $empleados,
+                function ($e) use ($t) {                   
+                    return (int)$e->id == (int)$t->id_usuario;
+                }
+            );
+
+            $turnos[$i]->empleado = array_values($filtroEmp)[0];
+        }
+        
+        myVista::renderPdf("lista_turnos", ["turnos" => $turnos]);
+    }
 }

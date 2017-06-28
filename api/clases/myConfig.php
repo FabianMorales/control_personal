@@ -10,5 +10,5 @@ class myConfig{
     var $collation = 'utf8_unicode_ci';
     var $prefix = "sis_";
 
-    var $urlSitio = '/control_asistencia/public_html/';
+    var $urlSitio = '/desarrolloweb/control_personal/';
 }

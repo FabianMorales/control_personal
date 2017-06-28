@@ -1,0 +1,71 @@
+@page {
+    size: 8.5in 11in;
+    margin: .5in;
+}
+
+#bgimg {
+    position: fixed;
+    left: -.5in;
+    top: -.5in;
+    width: 8.5in;
+    height: 11in;
+    z-index: -999
+}
+    
+/*body{
+    background: url(../img/fondo_pdf02.jpg) top left repeat-x;
+    background-size: cover;
+}*/
+
+body, h1, h2, h3, td{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.logo{
+    width: 80px;
+}
+
+.tabla-borde{
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.tabla-borde table{
+    width: 100%;
+}
+
+.tabla-borde table th,
+.tabla-borde table td{
+    padding: 5px;
+    border: 1px solid #333;
+}
+
+.tabla-borde table tr td:first-child,
+.tabla-borde table tr th:first-child{
+    border-left: none;
+}
+
+.tabla-borde table tr td:last-child,
+.tabla-borde table tr th:last-child{
+    border-right: none;
+}
+
+.tabla-borde table tr:first-child th,
+.tabla-borde table tr:first-child td{
+    border-top: none;
+}
+
+.tabla-borde table tr:last-child th,
+.tabla-borde table tr:last-child td{
+    border-bottom: none;
+}
+
+.tabla-borde thead{
+    background-color: #0c4d78;
+    color: #fff;
+}
+
+.tabla-borde thead td{
+    color: #fff;
+}

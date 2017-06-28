@@ -2,9 +2,12 @@
 
 <div class="row">
     <div class="medium-2 columns">Filtrar por empleado</div>
-    <div class="medium-2 columns end">
+    <div class="medium-2 columns">
         <select name="empleado" ng-model="empleado" ng-options="e.id as e.nombres for e in empleados">
         </select>
+    </div>
+    <div class="medium-4 columns end">
+        <a class="button default" href="./api/files/pdf/turno"><i class="fi-page-pdf"></i> PDF turnos</a>
     </div>
 </div>
 

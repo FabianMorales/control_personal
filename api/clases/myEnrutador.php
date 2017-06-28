@@ -34,6 +34,9 @@ class myEnrutador {
         $app->get('/files/usuario/:id', myControlador::_("Usuario@descargarUsuario"));
         $app->get('/files/turno', myControlador::_("Turno@listarTurnos"));
         $app->get('/files/turno/:id', myControlador::_("Turno@descargarTurno"));
+        $app->get('/files/pdf/usuario', myControlador::_("Usuario@listarPdf"));
+        $app->get('/files/pdf/turno', myControlador::_("Flujo@listarPdf"));
+
         $app->run();
         return $app;
     }

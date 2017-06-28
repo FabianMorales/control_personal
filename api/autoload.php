@@ -2,7 +2,7 @@
 
 if (!defined("DS")){
     define("DS", DIRECTORY_SEPARATOR);
-    define('BASE_DIR', dirname(__DIR__));    
+    define('BASE_DIR', dirname(__DIR__));
     
     $coreDir = __DIR__."/";
     $clasesDir = $coreDir."clases/";
@@ -19,7 +19,10 @@ if (!defined("DS")){
         $clasesDir."myPeticion.php",
         $clasesDir."myEnrutador.php",
         $clasesDir."mySesion.php",
-        $libDir."Slim/Slim.php"
+        $clasesDir."myVista.php",
+        $libDir."Slim/Slim.php",
+        $libDir."dompdf/autoload.inc.php",
+        $libDir."Twig/Autoloader.php",
     ];
 
     foreach ($archivos as $a){
@@ -28,5 +31,6 @@ if (!defined("DS")){
     
     mySesion::boot();
     myPeticion::boot();
+    myVista::boot();
     $app = myEnrutador::boot();
 }

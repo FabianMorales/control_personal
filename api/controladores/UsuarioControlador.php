@@ -130,4 +130,11 @@ class UsuarioControlador extends myControlador {
         
         die();
     }
+    
+    public function listarPdf(){
+        $modelo = myApp::getModelo("Usuario");
+        $usuarios = $modelo->listar();
+        
+        myVista::renderPdf("lista_empleados", ["empleados" => $usuarios]);
+    }
 }

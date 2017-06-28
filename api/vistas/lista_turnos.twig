@@ -1,0 +1,28 @@
+{% extends "master_pdf.twig" %}
+
+{% block subtitulo %}
+Lista de turnos trabajados
+{% endblock %}
+
+{% block contenido %}
+    <div class="tabla-borde">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Empleado</th>
+                    <th>Entrada</th>
+                    <th>Salida</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in turnos %}
+                    <tr>
+                        <td>{{ t.empleado.nombres }}</td>
+                        <td>{{ t.fecha_entrada }}</td>
+                        <td>{{ t.fecha_salida }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
