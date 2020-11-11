@@ -1,6 +1,6 @@
 <?php
 
-class CargoControlador extends myControlador {
+class CargoControlador extends myAdminControlador {
 
     public function index() {
         $modelo = myApp::getModelo("Cargo");

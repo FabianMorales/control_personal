@@ -1,6 +1,6 @@
 <?php
 
-class TurnoControlador extends myControlador {
+class TurnoControlador extends myAdminControlador {
 
     public function index() {
         $modelo = myApp::getModelo("Turno");

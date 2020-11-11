@@ -1,5 +1,5 @@
 (function($angular, _, $window){
-    $angular    .config(['$routeProvider', function($routeProvider) {
+    $window.$angular.config(['$routeProvider', function($routeProvider) {
        $routeProvider
        .when('/turnos', {
           templateUrl: 'templates/turnos/lista.html', controller: 'TurnosController'
@@ -14,11 +14,19 @@
             templateUrl: 'templates/registro.html', controller: 'MainController'
        });
     }])
-    .controller('TurnosController', ['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
+    .controller('TurnosController', ['$scope', '$http', '$routeParams', '$location', 'sesion', function ($scope, $http, $routeParams, $location, sesion) {
         $scope.turnos = [];
         $scope.turno = {};
+        $scope.sesion = { sesion: -1, empleado: null};
 
         $scope.init = function(){
+            sesion(function($sesion, $usuario){
+                $scope.sesion = { sesion: $sesion, empleado: $usuario };
+                if ($sesion === 0){
+                    $location.path('inicio');
+                }
+            });
+            
             if ($routeParams !== 'undefined' && $routeParams.idTurno){
                 $http({
                     method: 'GET',
@@ -76,4 +84,4 @@
             });
         };
     }]);
-})(window.$angular, window._, window);
+})(angular, window._, window);

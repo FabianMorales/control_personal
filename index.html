@@ -43,13 +43,14 @@
                     <li ng-repeat="(key, menu) in menus" ng-class="{activo: menu.activo}">
                         <a href="{{ menu.href }}" ng-click="activar(menu)"><i class="{{ menu.clase }}"></i> {{ menu.label }}</a>
                     </li>
+                    <li ng-if="sesion.sesion == 1"><a ng-click="cerrarSesion()"><i class="fi-power"></i> Cerrar sesi&oacute;n</a></li>
                 </ul>
             </nav>
         </div>
         <div class="medium-9 large-10 columns contenido">
             <header>
                 <div class="row">
-                    <div class="medium-6 large-7 columns">
+                    <div class="medium-4 large columns">
                         
                     </div>
                     <div class="medium-6 large-5 columns info">

@@ -13,10 +13,10 @@ class myVista {
         $loaderTwig = new Twig_Loader_Filesystem($dirTemplates);
         myVista::$twig = new Twig_Environment($loaderTwig, array("cache" => false));
         
-        $assetFn = new Twig_SimpleFunction("asset", array(myVista, "asset"));        
+        $assetFn = new Twig_SimpleFunction("asset", array(myVista::class, "asset"));        
         myVista::$twig->addFunction($assetFn);
         
-        $urlFn = new Twig_SimpleFunction("url", array(myVista, "url"));        
+        $urlFn = new Twig_SimpleFunction("url", array(myVista::class, "url"));        
         myVista::$twig->addFunction($urlFn);
     }
     

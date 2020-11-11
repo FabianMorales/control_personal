@@ -1,5 +1,5 @@
 (function($angular, _, $window){
-    $angular.config(['$routeProvider', function($routeProvider) {
+    $window.$angular.config(['$routeProvider', function($routeProvider) {
        $routeProvider
        .when('/historico', {
             templateUrl: 'templates/historico.html', controller: 'HistoricoController'
@@ -8,10 +8,11 @@
             templateUrl: 'templates/registro.html', controller: 'MainController'
        });
     }])
-    .controller('HistoricoController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {        
+    .controller('HistoricoController', ['$scope', '$http', '$routeParams', 'sesion', '$location', function ($scope, $http, $routeParams, sesion, $location) {        
         $scope.empleados = null;
         $scope.turnos = null;
         $scope.empleado = '';
+        $scope.sesion = { sesion: -1, empleado: null};
         
         $scope.obtenerTurnos = function(){
             $http({
@@ -26,6 +27,12 @@
         }
         
         $scope.init = function(){
+            sesion(function($sesion, $usuario){
+                $scope.sesion = { sesion: $sesion, empleado: $usuario };
+                if ($sesion === 0){
+                    $location.path('inicio');
+                }
+            });
             $scope.obtenerTurnos();
         };
 
@@ -38,4 +45,4 @@
             return $ret;
         }
     }]);
-})(window.$angular, window._, window);
+})(angular, window._, window);

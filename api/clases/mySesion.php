@@ -6,7 +6,7 @@ class mySesion {
         session_start();
     }
 
-    public static function get($var, $default) {
+    public static function get($var, $default='') {
         return !empty($_SESSION[$var]) ? $_SESSION[$var] : $default;
     }
 
@@ -14,7 +14,7 @@ class mySesion {
         $_SESSION[$var] = $valor;
     }
 
-    public static function clear($var) {
+    public static function borrar($var) {
         unset($_SESSION[$var]);
     }
 

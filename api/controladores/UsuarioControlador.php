@@ -1,6 +1,6 @@
 <?php
 
-class UsuarioControlador extends myControlador {
+class UsuarioControlador extends myAdminControlador {
 
     public function index() {
         $modelo = myApp::getModelo("Usuario");
@@ -27,6 +27,11 @@ class UsuarioControlador extends myControlador {
         $modelo->encontrar($id);
         
         $modelo->asociar($req->all());
+        $clave = $req->getVar("clave");
+        
+        if (!empty($clave)){
+            $modelo->clave = sha1($clave);
+        }
         
         $ret = [];
         if ($modelo->guardar()){

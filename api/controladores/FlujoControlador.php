@@ -1,6 +1,6 @@
 <?php
 
-class FlujoControlador extends myControlador {
+class FlujoControlador extends myAdminControlador {
 
     public function index() {
         $turnos = myApp::getModelo("TurnoTrabajo")->listar();
@@ -126,7 +126,7 @@ class FlujoControlador extends myControlador {
             
             $filtroEmp = array_filter(
                 $empleados,
-                function ($e) use ($t) {                   
+                function ($e) use ($t) {
                     return (int)$e->id == (int)$t->id_usuario;
                 }
             );
@@ -135,5 +135,17 @@ class FlujoControlador extends myControlador {
         }
         
         myVista::renderPdf("lista_turnos", ["turnos" => $turnos]);
+    }
+    
+    public function crearBackup(){
+        $cfg = new myConfig();
+        $file ='respaldo_bd_'.date('Y_m_d_His').'.sql';
+        $ruta = BASE_DIR.'/api/backups/'.$file;
+        $output = '';
+		$cmd = 'mysqldump '.$cfg->database.' --password='.$cfg->password.' --user='.$cfg->username.' --single-transaction >'.$ruta;
+		echo $cmd;
+        $res = exec($cmd, $output);
+        print_r($output);
+		print_r($res);
     }
 }

@@ -2,21 +2,15 @@
 
 abstract class myAdminControlador extends myControlador{
     public function ejecutar($tarea = "index", $args = []){
-        $usuario = JFactory::getUser();
-        $grupos = JUserHelper::getUserGroups($usuario->id);
+        $sesion = myApp::getSesion();
+        $usuario = $sesion->get("sesion.usuario");
         
-        if (!(in_array(7, $grupos) || in_array(8, $grupos))){
-            myApp::mostrarMensaje("Acceso denegado", "error");
-            return "";
+        if (sizeof($usuario) && !empty($usuario)){
+            parent::ejecutar($tarea, $args);
         }
-        
-        $app = JFactory::getApplication();
-        if (!$app->isAdmin()){
-            myApp::mostrarMensaje("Esta sección debe accederse desde el administrador", "error");
-            return "";
+        else{
+            echo json_encode(["ok" => 0, "mensaje" => "Debes iniciar sesión para ejecutar esta acción"]);
         }
-        
-        parent::ejecutar($tarea, $args);
     }
     
     public function index() { }

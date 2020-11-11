@@ -1,26 +1,29 @@
-<h2 class="titulo" ng-init="init()">Hist&oacute;rico</h2>
+<div ng-init="init()"></div>
+<div ng-if="sesion.sesion == 1">
+    <h2 class="titulo">Hist&oacute;rico</h2>
 
-<div class="row">
-    <div class="medium-2 columns">Filtrar por empleado</div>
-    <div class="medium-2 columns">
-        <select name="empleado" ng-model="empleado" ng-options="e.id as e.nombres for e in empleados">
-        </select>
+    <div class="row">
+        <div class="medium-2 columns">Filtrar por empleado</div>
+        <div class="medium-2 columns">
+            <select name="empleado" ng-model="empleadoSel" ng-options="e.id as e.nombres for e in empleados">
+            </select>
+        </div>
+        <div class="medium-4 columns end">
+            <a class="button default" href="./api/files/pdf/turno"><i class="fi-page-pdf"></i> PDF turnos</a>
+        </div>
     </div>
-    <div class="medium-4 columns end">
-        <a class="button default" href="./api/files/pdf/turno"><i class="fi-page-pdf"></i> PDF turnos</a>
+
+    <div class="row">
+        <div class="medium-2 columns item head">ID</div>
+        <div class="medium-4 columns item head">Empleado</div>
+        <div class="medium-3 columns item head">Entrada</div>
+        <div class="medium-3 columns item head">Salida</div>
     </div>
-</div>
 
-<div class="row">
-    <div class="medium-2 columns item head">ID</div>
-    <div class="medium-4 columns item head">Empleado</div>
-    <div class="medium-3 columns item head">Entrada</div>
-    <div class="medium-3 columns item head">Salida</div>
-</div>
-
-<div class="row" ng-repeat="(key, turno) in turnos | filter:{ id_usuario: empleado }">
-    <div class="medium-2 columns item">{{ turno.id }}</div>
-    <div class="medium-4 columns item">{{ turno.empleado.nombres }}</div>
-    <div class="medium-3 columns item">{{ turno.fecha_entrada }}</div>
-    <div class="medium-3 columns item">{{ turno.fecha_salida }}</div>
+    <div class="row" ng-repeat="(key, turno) in turnos | filter:{ id_usuario: empleadoSel }">
+        <div class="medium-2 columns item">{{ turno.id }}</div>
+        <div class="medium-4 columns item">{{ turno.empleado.nombres }}</div>
+        <div class="medium-3 columns item">{{ turno.fecha_entrada }}</div>
+        <div class="medium-3 columns item">{{ turno.fecha_salida }}</div>
+    </div>
 </div>

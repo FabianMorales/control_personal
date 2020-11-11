@@ -7,7 +7,7 @@ class myApp{
     static $modelo;
     static $func;	
     static $peticion;
-    static $eloquent;
+    static $sesion;
     static $bd;
 
     public static function getControlador($nombre = ""){
@@ -66,6 +66,14 @@ class myApp{
             myApp::$func = new myFunciones();
         }
         return myApp::$func;
+    }
+    
+    public static function getSesion(){
+        if(!myApp::$sesion){
+            myApp::$sesion = new mySesion();
+        }
+        
+        return myApp::$sesion;
     }
 
     public static function getPeticion(){

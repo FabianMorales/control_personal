@@ -1,32 +1,35 @@
-<h2 class="titulo">Registra tu ingreso/salida</h2>
-
-<div class="row">
-    <div class="medium-12 columns">
-        <p>Ingresa tu número de cédula y tu clave. Luego has clic en el botón consultar. 
-        Si no has iniciado turno, se mostrará un botón para que lo inicies. 
-        Si ya has iniciado un turno, se mostrará un botón para que termines tu turno</p>
+<div ng-init="init()"></div>
+<div ng-if="sesion.sesion == 0">
+    <h2 class="titulo">Registra tu ingreso/salida</h2>
+    <div class="row">
+        <div class="medium-12 columns">
+            <p>Ingresa tu número de cédula y tu clave. Luego has clic en el botón consultar. 
+            Si no has iniciado turno, se mostrará un botón para que lo inicies. 
+            Si ya has iniciado un turno, se mostrará un botón para que termines tu turno</p>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="medium-3 columns">C&eacute;dula</div>
-    <div class="medium-3 columns end"><input type="text" name="cedula" ng-model="cedula" /></div>
-</div>
+    <div class="row">
+        <div class="medium-3 columns">C&eacute;dula</div>
+        <div class="medium-3 columns end"><input type="text" name="cedula" ng-model="sesion.cedula" /></div>
+    </div>
 
-<div class="row">
-    <div class="medium-3 columns">Clave</div>
-    <div class="medium-3 columns end"><input type="password" name="clave" ng-model="clave" /></div>
-</div>
+    <div class="row">
+        <div class="medium-3 columns">Clave</div>
+        <div class="medium-3 columns end"><input type="password" name="clave" ng-model="sesion.clave" /></div>
+    </div>
+
+    <div class="row">
+        <div class="medium-12 columns">
+            <button class="button default" ng-click="autorizar()"><i class="fi-magnifying-glass"></i> Entrar</button>
+        </div>
+    </div>
     
-<div class="row">
-    <div class="medium-12 columns">
-        <button class="button default" ng-click="autorizar()"><i class="fi-magnifying-glass"></i> Consultar</button>
-    </div>
-</div>
-
-<div class="row" ng-if="empleado">
     <br />
-    <hr >
+    <hr />
+</div>
+<h1 ng-model="cedula"></h1>
+<div class="row" ng-if="sesion.sesion == 1 && sesion.empleado">
     <br />
     <div class="medium-3 columns">
         <img src='img/usuarios/{{ empleado.id }}.png' alt="empleado.nombre" />

@@ -1,5 +1,5 @@
 (function($angular, _, $window){
-    $angular.config(['$routeProvider', function($routeProvider) {
+    $window.$angular.config(['$routeProvider', function($routeProvider) {
        $routeProvider
        .when('/empleados', {
           templateUrl: 'templates/empleados/lista.html', controller: 'EmpleadosController'
@@ -14,12 +14,19 @@
             templateUrl: 'templates/registro.html', controller: 'MainController'
        });
     }])
-    .controller('EmpleadosController', ['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
+    .controller('EmpleadosController', ['$scope', '$http', '$routeParams', '$location','sesion', function ($scope, $http, $routeParams, $location, sesion) {
         $scope.cargos = [];
         $scope.empleados = [];
         $scope.empleado = {};
+        $scope.sesion = { sesion: -1, empleado: null};
         
         $scope.init = function(){
+            sesion(function($sesion, $usuario){
+                $scope.sesion = { sesion: $sesion, empleado: $usuario };
+                if ($sesion === 0){
+                    $location.path('inicio');
+                }
+            });
             
             if ($routeParams !== 'undefined' && $routeParams.idEmpleado){
                 $http({
@@ -97,4 +104,4 @@
             });
         };
     }]);
-})(window.$angular, window._, window);
+})(angular, window._, window);
